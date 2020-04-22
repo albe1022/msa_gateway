@@ -44,7 +44,7 @@ spring:
     gateway:
       routes:
         - id: Workflow
-          uri: http://Workflow:8080
+          uri: http://workflow:8080
           predicates:
             - Path=/workflowHists/** /rawData/**
         - id: Preprocess
