@@ -1,0 +1,74 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+        - id: Workflow
+          uri: http://localhost:8081
+          predicates:
+            - Path=/workflowHists/** /rawData/**
+        - id: Preprocess
+          uri: http://localhost:8082
+          predicates:
+            - Path=/processedData/** /rawData/**
+        - id: Inference
+          uri: http://localhost:8083
+          predicates:
+            - Path=/inferenceResults/** /processedData/**
+        - id: Raw Data
+          uri: http://localhost:8084
+          predicates:
+            - Path=/rawData/** 
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: Workflow
+          uri: http://Workflow:8080
+          predicates:
+            - Path=/workflowHists/** /rawData/**
+        - id: Preprocess
+          uri: http://Preprocess:8080
+          predicates:
+            - Path=/processedData/** /rawData/**
+        - id: Inference
+          uri: http://Inference:8080
+          predicates:
+            - Path=/inferenceResults/** /processedData/**
+        - id: RawData
+          uri: http://RawData:8080
+          predicates:
+            - Path=/rawData/** 
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080
