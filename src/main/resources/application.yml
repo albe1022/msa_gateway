@@ -11,19 +11,19 @@ spring:
         - id: Workflow
           uri: http://localhost:8081
           predicates:
-            - Path=/workflowHists/**,/rawData/**
+            - Path=/workflowHists/**
         - id: Preprocess
           uri: http://localhost:8082
           predicates:
-            - Path=/processedData/**,/rawData/**
+            - Path=/processedData/**,/rawDataLists/**
         - id: Inference
           uri: http://localhost:8083
           predicates:
-            - Path=/inferenceResults/**,/processedData/**
+            - Path=/inferenceResults/**,/processedDataLists/**
         - id: Raw Data
           uri: http://localhost:8084
           predicates:
-            - Path=/rawData/** 
+            - Path=/rawDatas/**
       globalcors:
         corsConfigurations:
           '[/**]':
@@ -46,15 +46,15 @@ spring:
         - id: Workflow
           uri: http://workflow:8080
           predicates:
-            - Path=/workflowHists/**, /rawDatas/**
+            - Path=/workflowHists/**
         - id: Preprocess
           uri: http://Preprocess:8080
           predicates:
-            - Path=/processedDatas/** #/rawData/**
+            - Path=/processedDatas/**, /rawDataLists/**
         - id: Inference
           uri: http://Inference:8080
           predicates:
-            - Path=/inferenceResults/** #/processedData/**
+            - Path=/inferenceResults/**, /processedDataLists/**
         - id: RawData
           uri: http://RawData:8080
           predicates:
