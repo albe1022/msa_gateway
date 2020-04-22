@@ -46,7 +46,7 @@ spring:
         - id: Workflow
           uri: http://workflow:8080
           predicates:
-            - Path=/workflowHists/**
+            - Path=/workflowHists/**, /rawDatas/**
         - id: Preprocess
           uri: http://Preprocess:8080
           predicates:
